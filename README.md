@@ -48,8 +48,8 @@ php artisan vendor:publish --provider="BataBoom\Captcha\HCaptchaServiceProvider"
 Add `HCaptcha_SECRET` and `HCaptcha_SITEKEY` in **.env** file :
 
 ```
-HCaptcha_SECRET=secret-key
-HCaptcha_SITEKEY=site-key
+HCAPTCHA_SECRET=secret-key
+HCAPTCHA_SITEKEY=site-key
 ```
 
 (You can obtain them from [here](https://www.google.com/recaptcha/admin))
@@ -82,6 +82,8 @@ With [custom attributes](https://developers.google.com/recaptcha/docs/display#re
 
 ```php
 {!! HCaptcha::display(['data-theme' => 'dark']) !!}
+
+{!! HCaptcha::display(['data-theme' => 'dark', 'data-callback' => 'onSubmit', 'data-theme' => 'dark']) !!}
 ```
 
 Invisible reCAPTCHA using a [submit button](https://developers.google.com/recaptcha/docs/invisible):
