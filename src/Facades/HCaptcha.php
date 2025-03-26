@@ -1,10 +1,10 @@
 <?php
 
-namespace Anhskohbo\NoCaptcha\Facades;
+namespace BataBoom\Captcha\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
-class NoCaptcha extends Facade
+class HCaptcha extends Facade
 {
     /**
      * Get the registered name of the component.

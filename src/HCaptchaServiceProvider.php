@@ -1,10 +1,10 @@
 <?php
 
-namespace Anhskohbo\NoCaptcha;
+namespace BataBoom\Captcha;
 
 use Illuminate\Support\ServiceProvider;
 
-class NoCaptchaServiceProvider extends ServiceProvider
+class HCaptchaServiceProvider extends ServiceProvider
 {
     /**
      * Indicates if loading of the provider is deferred.
@@ -38,12 +38,16 @@ class NoCaptchaServiceProvider extends ServiceProvider
      */
     protected function bootConfig()
     {
-        $path = __DIR__.'/config/captcha.php';
+        $path = __DIR__.'/config/hcaptcha.php';
+        $reqPath = __DIR__.'/Http/Requests/HCaptchaLoginRequest.php';
 
-        $this->mergeConfigFrom($path, 'captcha');
+        $this->mergeConfigFrom($path, 'hcaptcha');
 
         if (function_exists('config_path')) {
-            $this->publishes([$path => config_path('captcha.php')]);
+            $this->publishes([
+                $path => config_path('hcaptcha.php'),
+                $reqPath => app_path('Http/Requests/Auth/HCaptchaLoginRequest.php'),
+            ]);
         }
     }
 
@@ -53,10 +57,10 @@ class NoCaptchaServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->singleton('captcha', function ($app) {
-            return new NoCaptcha(
-                $app['config']['captcha.secret'],
-                $app['config']['captcha.sitekey'],
-                $app['config']['captcha.options']
+            return new HCaptcha(
+                $app['config']['hcaptcha.secret'],
+                $app['config']['hcaptcha.sitekey'],
+                $app['config']['hcaptcha.options']
             );
         });
     }

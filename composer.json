@@ -1,20 +1,21 @@
 {
-    "name": "anhskohbo/no-captcha",
-    "description": "No CAPTCHA reCAPTCHA For Laravel.",
+    "name": "bataboom/h-captcha",
+    "description": "hCAPTCHA For Laravel.",
     "keywords": [
-        "recaptcha",
-        "no-captcha",
+        "h-captcha",
+        "hcaptcha",
         "captcha",
         "laravel",
         "laravel4",
         "laravel5",
-        "laravel6"
+        "laravel6",
+        "laravel10",
     ],
     "license": "MIT",
     "authors": [
         {
-            "name": "anhskohbo",
-            "email": "anhskohbo@gmail.com"
+            "name": "bataboom",
+            "email": "contact@bataboom.dev"
         }
     ],
     "require": {
@@ -27,16 +28,16 @@
     },
     "autoload": {
         "psr-4": {
-            "Anhskohbo\\NoCaptcha\\": "src/"
+            "BataBoom\\Captcha\\": "src/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "Anhskohbo\\NoCaptcha\\NoCaptchaServiceProvider"
+                "BataBoom\\Captcha\\HCaptchaServiceProvider"
             ],
             "aliases": {
-                "NoCaptcha": "Anhskohbo\\NoCaptcha\\Facades\\NoCaptcha"
+                "HCaptcha": "BataBoom\\Captcha\\Facades\\HCaptcha"
             }
         }
     }

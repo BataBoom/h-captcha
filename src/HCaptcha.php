@@ -1,14 +1,14 @@
 <?php
 
-namespace Anhskohbo\NoCaptcha;
+namespace BataBoom\Captcha;
 
 use Symfony\Component\HttpFoundation\Request;
 use GuzzleHttp\Client;
 
-class NoCaptcha
+class HCaptcha
 {
-    const CLIENT_API = 'https://www.google.com/recaptcha/api.js';
-    const VERIFY_URL = 'https://www.google.com/recaptcha/api/siteverify';
+    const CLIENT_API = 'https://js.hcaptcha.com/1/api.js';
+    const VERIFY_URL = 'https://api.hcaptcha.com/siteverify';
 
     /**
      * The recaptcha secret key.
@@ -37,7 +37,7 @@ class NoCaptcha
     protected $verifiedResponses = [];
 
     /**
-     * NoCaptcha.
+     * hCaptcha.
      *
      * @param string $secret
      * @param string $sitekey
@@ -114,7 +114,7 @@ class NoCaptcha
     }
 
     /**
-     * Verify no-captcha response.
+     * Verify h-captcha response.
      *
      * @param string $response
      * @param string $clientIp
@@ -149,7 +149,7 @@ class NoCaptcha
     }
 
     /**
-     * Verify no-captcha response by Symfony Request.
+     * Verify h-captcha response by Symfony Request.
      *
      * @param Request $request
      *
@@ -158,7 +158,7 @@ class NoCaptcha
     public function verifyRequest(Request $request)
     {
         return $this->verifyResponse(
-            $request->get('g-recaptcha-response'),
+            $request->get('h-captcha-response'),
             $request->getClientIp()
         );
     }
@@ -221,7 +221,7 @@ class NoCaptcha
         if (!isset($attributes['class'])) {
             $attributes['class'] = '';
         }
-        $attributes['class'] = trim('g-recaptcha ' . $attributes['class']);
+        $attributes['class'] = trim('h-captcha ' . $attributes['class']);
 
         return $attributes;
     }
