@@ -14,7 +14,7 @@ hCAPTCHA for Laravel
 ## Installation
 
 ```
-composer require bataboom/h-captcha
+composer require bataboom/h-captcha:dev-master
 ```
 
 ## Laravel 5 and above
