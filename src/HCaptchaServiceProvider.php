@@ -40,15 +40,26 @@ class HCaptchaServiceProvider extends ServiceProvider
     {
         $path = __DIR__.'/config/hcaptcha.php';
         $reqPath = __DIR__.'/Http/Requests/HCaptchaLoginRequest.php';
+        $filamentLoginPath = __DIR__.'/Filament/Pages/Auth/AdminLoginExample.php';
 
         $this->mergeConfigFrom($path, 'hcaptcha');
 
         if (function_exists('config_path')) {
-            $this->publishes([
-                $path => config_path('hcaptcha.php'),
-                $reqPath => app_path('Http/Requests/Auth/HCaptchaLoginRequest.php'),
-            ]);
+        $this->publishes([
+            $path => config_path('hcaptcha.php'),
+        ]);
+
+        $this->publishes([
+            $reqPath => app_path('Http/Requests/Auth/HCaptchaLoginRequest.php'),
+        ], 'hcaptcha-requests');
+
+        $this->publishes([
+            $filamentLoginPath => app_path('Filament/Pages/Auth/AdminLoginExample.php'),
+        ], 'hcaptcha-filament-login');
+
         }
+
+        $this->loadViewsFrom(__DIR__.'/../resources/views', 'h-captcha');
     }
 
     /**

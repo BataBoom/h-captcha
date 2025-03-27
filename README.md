@@ -1,15 +1,9 @@
 hCAPTCHA for Laravel
 ==========
 
-[![Build Status](https://travis-ci.org/anhskohbo/no-captcha.svg?branch=master&style=flat-square)](https://travis-ci.org/anhskohbo/no-captcha)
-[![Latest Stable Version](https://poser.pugx.org/anhskohbo/no-captcha/v/stable)](https://packagist.org/packages/anhskohbo/no-captcha)
-[![Total Downloads](https://poser.pugx.org/anhskohbo/no-captcha/downloads)](https://packagist.org/packages/anhskohbo/no-captcha)
-[![Latest Unstable Version](https://poser.pugx.org/anhskohbo/no-captcha/v/unstable)](https://packagist.org/packages/anhskohbo/no-captcha)
-[![License](https://poser.pugx.org/anhskohbo/no-captcha/license)](https://packagist.org/packages/anhskohbo/no-captcha)
-
-![recaptcha_anchor 2x](https://cloud.githubusercontent.com/assets/1529454/5291635/1c426412-7b88-11e4-8d16-46161a081ece.gif)
-
-> For Laravel 4 use [v1](https://github.com/anhskohbo/no-captcha/tree/v1) branch.
+Inspirations:
+[anhskohbo/no-captcha](https://github.com/anhskohbo/no-captcha) package.
+[abanoubnassem/filament-grecaptcha-field](https://github.com/AbanoubNassem/filament-grecaptcha-field) package.
 
 ## Installation
 
@@ -100,7 +94,7 @@ Add `'h-captcha-response' => 'required|captcha'` to rules array :
 
 ```php
 $validate = Validator::make(Input::all(), [
-	'h-captcha-response' => 'required|captcha'
+    'h-captcha-response' => 'required|captcha'
 ]);
 
 ```
@@ -194,7 +188,63 @@ if (! empty($_POST)) {
 <?php echo $captcha->renderJs(); ?>
 ```
 
+## hCaptcha Filament Installation -- hCaptcha field for the Filament Forms(V2-V3), works in `Admin-Panel` and `Frontend-Forms`.
+
+You can install the package via composer:
+
+```bash
+composer require bataboom/h-captcha
+```
+
+You may publish the configuration by running:
+```bash
+php artisan vendor:publish --provider="BataBoom\HCaptcha\HCaptchaServiceProvider"
+```
+
+### Configuration
+
+Add `HCAPTCHA_SECRET` and `HCAPTCHA_SITEKEY` in **.env** file :
+
+```
+HCAPTCHA_SECRET=secret-key
+HCAPTCHA_SITEKEY=site-key
+```
+(You can obtain them from [here](https://www.google.com/recaptcha/admin))
+
+
+## Usage
+
+Publish an Example using:
+```bash
+php artisan vendor:publish --tag=hcaptcha-filament-login
+```
+
+Or define it yourself
+```php
+use BataBoom\Captcha\Forms\Components\HCapthaFilamentField;
+
+// admin panel
+    public static function form(Form $form): Form
+    {
+        return $form->schema([
+                    ...
+                    HCapthaFilamentField::make('captcha')
+                ]);
+     }
+
+//forntend-forms 
+    public $captcha = ''; // must be initialized 
+    protected function getFormSchema(): array
+    {
+        return [
+            ....
+             HCapthaFilamentField::make('captcha')
+        ];
+    }
+```
+
 ## Contribute
 
-https://github.com/anhskohbo/no-captcha/pulls
 https://github.com/BataBoom/h-captcha/pulls
+https://github.com/anhskohbo/no-captcha/pulls
+https://github.com/AbanoubNassem/filament-grecaptcha-field/pulls
